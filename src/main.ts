@@ -1,12 +1,20 @@
-// wrong way of writing the type for function
-type LocationState = {
-  state: 'Loading' | 'Success' | 'Error'
-  coords?: { lat: number; lon: number }
-  error?: { message: string }
+type LoadingLocationState = {
+  state: 'Loading'
 }
 
+type SuccessLocationState = {
+  state: 'Success'
+  coords: { lat: number; lon: number }
+}
 
-// function 
+type ErrorLocationState = {
+  state: 'Error'
+  error: { message: string }
+}
+
+type LocationState = LoadingLocationState | SuccessLocationState | ErrorLocationState
+
+// function
 function printLocation(location: LocationState) {
   switch (location.state) {
     case 'Loading':
@@ -14,11 +22,11 @@ function printLocation(location: LocationState) {
       break
 
     case 'Success':
-      console.log(location.coords?.lat, location.coords?.lon)
+      console.log(location.coords.lat, location.coords.lon)
       break
 
     case 'Error':
-      console.log(location.error?.message)
+      console.log(location.error.message)
       break
   }
 }
